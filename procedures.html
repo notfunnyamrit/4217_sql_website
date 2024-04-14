@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL and PL/SQL Examples</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+    .example {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background_image">
+<div class="navbar">
+<a href="variables.html">VARIABLES</a>
+
+<a href="controlstruc.html">CONTROL STRUCTURES</a>
+
+<a href="procedures.html">PROCEDURES</a>
+
+<a href="functionsplsql.html">FUNCTIONS</a>
+
+<a href="cursors.html">CURSORS</a>
+
+<a href="excphandling.html">EXCEPTION HANDLING</a>
+
+<a href="triggers.html">TRIGGERS</a>
+</div>
+  <div class="buttons">
+    <a href="sql.html"class="button">MYSQL</a>
+    <a href="plsql.html" class="button">PLSQL</a>
+  </div>
+<h1> PROCEDURES </h1>
+
+<div class="example">
+    <h3>CREATE PROCEDURE</h3>
+    <pre><code>CREATE [OR REPLACE] PROCEDURE procedure_name  
+    [ (parameter [,parameter]) ]  
+IS  
+    [declaration_section]  
+BEGIN  
+    executable_section  
+[EXCEPTION  
+    exception_section]  
+END [procedure_name];  
+**EXAMPLE**
+create or replace procedure "INSERTUSER"    
+(id IN NUMBER,    
+name IN VARCHAR2)    
+is    
+begin    
+insert into user values(id,name);    
+end;    
+</code></pre>
+    <p><strong>Explanation:</strong>The PL/SQL stored procedure or simply a procedure is a PL/SQL block which performs one or more specific tasks. It is just like procedures in other programming languages.
+<br>Header: The header contains the name of the procedure and the parameters or variables passed to the procedure.
+<br>Body: The body contains a declaration section, execution section and exception section similar to a general PL/SQL block.</p>
+</div>
+
+<h3> PASS PARAMETERS IN PROCEDURE </h3>
+<p>When you want to create a procedure or function, you have to define parameters .There is three ways to pass parameters in procedure:<br>
+1.IN parameters: The IN parameter can be referenced by the procedure or function. The value of the parameter cannot be overwritten by the procedure or the function.<br>
+2.OUT parameters: The OUT parameter cannot be referenced by the procedure or function, but the value of the parameter can be overwritten by the procedure or function.<br>
+3.INOUT parameters: The INOUT parameter can be referenced by the procedure or function and the value of the parameter can be overwritten by the procedure or function.
+
+<div class="example">
+    <h3>Create procedure EXAMPLE</h3>
+    <pre><code>**TABLE Creation**
+create table user(id number(10) primary key,name varchar2(100));  
+**PROCEDURE CODE**
+create or replace procedure "INSERTUSER"    
+(id IN NUMBER,    
+name IN VARCHAR2)    
+is    
+begin    
+insert into user values(id,name);    
+end;    
+/       </code></pre>
+    <p><strong>Explanation:</strong>To insert th record in user table. WE need to create user table first and then write the procedure code as above to insert record in user table.</p>
+</div>
+
+<div class="example">
+    <h3>PROGRAM TO CALL PROCEDURE</h3>
+    <pre><code>BEGIN    
+   insertuser(101,'Rahul');  
+   dbms_output.put_line('record inserted successfully');    
+END;    
+/    </code></pre>
+    <p><strong>Explanation:</strong>by calling our INSERTUSER procedure, we can insert records in the table by putting values into insertuser procedure as shown above.</p>
+</div>
+
+<div class="example">
+    <h3>Drop Procedure</h3>
+    <pre><code>DROP PROCEDURE procedure_name;   </code></pre>
+    <p><strong>Explanation:</strong>This simply will delete the procedure.</p>
+
+</div>
+</body>
+</html>
+

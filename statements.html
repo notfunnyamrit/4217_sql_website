@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL and PL/SQL Examples</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+    .example {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="background_image">
+<div class="navbar">
+<a href="clauses.html">CLAUSES in SQL</a>
+
+<a href="ops.html">OPERATORS in SQL</a>
+
+<a href="statements.html">SQL Statements</a>
+
+<a href="functions.html">SQL Functions</a>
+</div>
+
+<div class="buttons">
+    <a href="sql.html"class="button">MYSQL</a>
+    <a href="plsql.html" class="button">PLSQL</a>
+  </div>
+
+<h1> SQL STATEMENTS </h1>
+
+<div class="example">
+    <h3>CREATE DATABASE Statement</h3>
+    <pre><code>CREATE DATABASE databasename;</code></pre>
+    <p><strong>Explanation:</strong>The CREATE DATABASE statement is used to create a new SQL database</p>
+</div>
+
+<div class="example">
+    <h3>DROP DATABASE Statement</h3>
+    <pre><code>DROP DATABASE databasename;</code></pre>
+    <p><strong>Explanation:</strong>The DROP DATABASE statement is used to drop an existing SQL database.</p>
+</div>
+
+<div class="example">
+    <h3>CREATE TABLE Statement</h3>
+    <pre><code>CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);</code></pre>
+    <p><strong>Explanation:</strong>The CREATE TABLE statement is used to create a new table in a database.<br>The column parameters specify the names of the columns of the table.
+<br>
+The datatype parameter specifies the type of data the column can hold</p>
+</div>
+
+<div class="example">
+    <h3>DROP TABLE Statement</h3>
+    <pre><code>DROP TABLE table_name;</code></pre>
+    <p><strong>Explanation:</strong>The DROP TABLE statement is used to drop an existing table in a database.</p>
+</div>
+
+<div class="example">
+    <h3>TRUNCATE TABLE Statement</h3>
+    <pre><code>TRUNCATE TABLE table_name;</code></pre>
+    <p><strong>Explanation:</strong>The TRUNCATE TABLE statement is used to delete the data inside a table, but not the table itself.</p>
+</div>
+
+<div class="example">
+    <h3>ALTER TABLE Statement: ADD COLUMN</h3>
+    <pre><code>ALTER TABLE table_name
+ADD column_name datatype;</code></pre>
+    <p><strong>Explanation:</strong>To add a column in a table, use the above syntax</p>
+</div>
+
+<div class="example">
+    <h3>ALTER TABLE: DROP COLUMN</h3>
+    <pre><code>ALTER TABLE table_name
+DROP COLUMN column_name;</code></pre>
+    <p><strong>Explanation:</strong>To delete a column in a table, use the above syntax</p>
+</div>
+
+<div class="example">
+    <h3>ALTER TABLE: MODIFY COLUMN</h3>
+    <pre><code>ALTER TABLE Persons
+MODIFY COLUMN DateOfBirth year;</code></pre>
+    <p><strong>Explanation:</strong>Changing the data type of the column named "DateOfBirth" in the "Persons" table.</p>
+</div>
+
+
+<div class="example">
+    <h3>INSERT INTO Statment</h3>
+    <pre><code>INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway');</code></pre>
+    <p><strong>Explanation:</strong>inserts a new record in the "Customers" table</p>
+</div>
+
+
+<div class="example">
+    <h3>SELECT Statement</h3>
+    <pre><code>SELECT * FROM employees;</code></pre>
+    <p><strong>Explanation:</strong> This SQL statement retrieves all columns from the employees table.</p>
+</div>
+
+<div class="example">
+    <h3>UPDATE Statement</h3>
+    <pre><code>UPDATE Customers
+SET ContactName = 'Alfred Schmidt', City = 'Frankfurt'
+WHERE CustomerID = 1;</code></pre>
+    <p><strong>Explanation:</strong>The above SQL statement updates the first customer (CustomerID = 1) with a new contact person and a new city.</p>
+</div>
+
+<div class="example">
+    <h3>DELETE Statement</h3>
+    <pre><code>DELETE FROM table_name WHERE condition;</code></pre>
+    <p><strong>Explanation:</strong>The DELETE statement is used to delete existing records in a table.</p>
+</div>
+
+<div class="example">
+    <h3>GROUP BY Statement</h3>
+    <pre><code>SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country;</code></pre>
+    <p><strong>Explanation:</strong>The GROUP BY statement groups rows that have the same values into summary rows, like "find the number of customers in each country".</p>
+</div>
+
+<div class="example">
+    <h3>CASE Statement</h3>
+    <pre><code>SELECT OrderID, Quantity,
+CASE
+    WHEN Quantity > 30 THEN 'The quantity is greater than 30'
+    WHEN Quantity = 30 THEN 'The quantity is 30'
+    ELSE 'The quantity is under 30'
+END AS QuantityText
+FROM OrderDetails;</code></pre>
+    <p><strong>Explanation:</strong>The above SQL goes through conditions and returns a value when the first condition is met</p>
+</div>
+
+<div class="example">
+    <h3>CREATE INDEX Statement</h3>
+    <pre><code>CREATE INDEX idx_lastname
+ON Persons (LastName);</code></pre>
+    <p><strong>Explanation:</strong>Indexes are used to retrieve data from the database more quickly than otherwise. The users cannot see the indexes, they are just used to speed up searches/queries.</p>
+</div>
+
+<div class="example">
+    <h3>CREATE VIEW Statement</h3>
+    <pre><code>CREATE VIEW [Brazil Customers] AS
+SELECT CustomerName, ContactName
+FROM Customers
+WHERE Country = 'Brazil';</code></pre>
+    <p><strong>Explanation:</strong>A view contains rows and columns, just like a real table. The fields in a view are fields from one or more real tables in the database.</p>
+</div>
+
+<h2> ALIAS IS SQL </h2>
+<div class="example">
+    <h3>Alias Column Syntax</h3>
+    <pre><code>SELECT column_name AS alias_name
+FROM table_name;</code></pre>
+    <p><strong>Explanation:</strong>Alias used to give a temporary name to a column</p>
+</div>
+
+<div class="example">
+    <h3>Alias Table Syntax</h3>
+    <pre><code>SELECT column_name(s)
+FROM table_name AS alias_name;</code></pre>
+    <p><strong>Explanation:</strong>Alias used to give a temporary name to a table</p>
+</div>
+
+</body>
+</html>

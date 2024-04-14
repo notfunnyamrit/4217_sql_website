@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL and PL/SQL Examples</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+    .example {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="background_image">
+<div class="navbar">
+<a href="variables.html">VARIABLES</a>
+
+<a href="controlstruc.html">CONTROL STRUCTURES</a>
+
+<a href="procedures.html">PROCEDURES</a>
+
+<a href="functionsplsql.html">FUNCTIONS</a>
+
+<a href="cursors.html">CURSORS</a>
+
+<a href="excphandling.html">EXCEPTION HANDLING</a>
+
+<a href="triggers.html">TRIGGERS</a>
+</div>
+  <div class="buttons">
+    <a href="sql.html"class="button">MYSQL</a>
+    <a href="plsql.html" class="button">PLSQL</a>
+  </div>
+<h1> FUNCTION </h1>
+<div class="example">
+    <h3>CREATE A FUNCTION</h3>
+    <pre><code>create or replace function adder(n1 in number, n2 in number)    
+return number    
+is     
+n3 number(8);    
+begin    
+n3 :=n1+n2;    
+return n3;    
+end;    
+/    </code></pre>
+    <p><strong>Explanation:</strong>The PL/SQL Function is very similar to PL/SQL Procedure. The main difference between procedure and a function is, a function must always return a value, and on the other hand a procedure may or may not return a value. Except this, all the other things of PL/SQL procedure are true for PL/SQL function too.<br>
+The above is a program for adding two numbers using a function.</p>
+</div>
+
+<div class="example">
+    <h3>Function Calling</h3>
+    <pre><code>DECLARE    
+   n3 number(2);    
+BEGIN    
+   n3 := adder(11,22);    
+   dbms_output.put_line('Addition is: ' || n3);    
+END;    
+/    </code></pre>
+    <p><strong>Explanation:</strong>We can use the above syntax to call an existing function. The parameters mentioned during the function calling will be passed and the function will be executed </p>
+</div>
+
+<div class="example">
+    <h3>Function Example 2:</h3>
+    <pre><code>DECLARE  
+   a number;  
+   b number;  
+   c number;  
+FUNCTION findMax(x IN number, y IN number)   
+RETURN number  
+IS  
+    z number;  
+BEGIN  
+   IF x > y THEN  
+      z:= x;  
+   ELSE  
+      Z:= y;  
+   END IF;  
+  
+   RETURN z;  
+END;   
+BEGIN  
+   a:= 23;  
+   b:= 45;  
+  
+   c := findMax(a, b);  
+   dbms_output.put_line(' Maximum of (23,45): ' || c);  
+END;  
+/ 
+Output:
+
+Maximum of (23,45): 45
+Statement processed.
+0.02 seconds </code></pre>
+    <p><strong>Explanation:</strong>an example to demonstrate Declaring, Defining and Invoking a simple PL/SQL function which will compute and return the maximum of two values.</p>
+</div>
+
+<div class="example">
+    <h3>Recursive Function</h3>
+    <pre><code>DECLARE  
+   num number;  
+   factorial number;  
+  
+FUNCTION fact(x number)  
+RETURN number   
+IS  
+   f number;  
+BEGIN  
+   IF x=0 THEN  
+      f := 1;  
+   ELSE  
+      f := x * fact(x-1);  
+   END IF;  
+RETURN f;  
+END;  
+  
+BEGIN  
+   num:= 6;  
+   factorial := fact(num);  
+   dbms_output.put_line(' Factorial '|| num || ' is ' || factorial);  
+END;  
+/  </code></pre>
+    <p><strong>Explanation:</strong>A program or a subprogram can call another subprogram. When a subprogram calls itself, it is called recursive call and the process is known as recursion.This example calculates the factorial of a given number by calling itself recursively.</p>
+</div>
+
+<div class="example">
+    <h3>Drop a Function</h3>
+    <pre><code>DROP FUNCTION function_name;  </code></pre>
+    <p><strong>Explanation:</strong>The syntax to drop a function.</p>
+</div>
+</body>
+</html>

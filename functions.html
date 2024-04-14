@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL and PL/SQL Examples</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+    .example {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="background_image">
+<div class="navbar">
+<a href="clauses.html">CLAUSES in SQL</a>
+
+<a href="ops.html">OPERATORS in SQL</a>
+
+<a href="statements.html">SQL Statements</a>
+
+<a href="functions.html">SQL Functions</a>
+</div>
+
+<div class="buttons">
+    <a href="sql.html"class="button">MYSQL</a>
+    <a href="plsql.html" class="button">PLSQL</a>
+  </div>
+
+<h1> SQL FUNCTIONS </h1>
+
+<div class="example">
+    <h3>MIN() Function</h3>
+    <pre><code>SELECT MIN(Price) AS SmallestPrice
+FROM Products;</code></pre>
+    <p><strong>Explanation:</strong>finds the price of the cheapest product</p>
+</div>
+
+<div class="example">
+    <h3>MAX Function</h3>
+    <pre><code>SELECT MAX(Price) AS LargestPrice
+FROM Products;
+</code></pre>
+    <p><strong>Explanation:</strong>finds the price of the most expensive product</p>
+</div>
+
+<div class="example">
+    <h3>COUNT Function</h3>
+    <pre><code>SELECT COUNT(ProductID)
+FROM Products;</code></pre>
+    <p><strong>Explanation:</strong>The COUNT() function returns the number of rows that matches a specified criterion.</p>
+</div>
+
+<div class="example">
+    <h3>AVG Function</h3>
+    <pre><code>SELECT AVG(Price)
+FROM Products;</code></pre>
+    <p><strong>Explanation:</strong>The AVG() function returns the average value of a numeric column.</p>
+</div>
+
+<div class="example">
+    <h3>SUM Function</h3>
+    <pre><code>SELECT SUM(Quantity)
+FROM OrderDetails;</code></pre>
+    <p><strong>Explanation:</strong>The SUM() function returns the total sum of a numeric column. </p>
+</div>
+
+<div class="example">
+    <h3>IFNULL Function</h3>
+    <pre><code>SELECT ProductName, UnitPrice * (UnitsInStock + IFNULL(UnitsOnOrder, 0))
+FROM Products;</code></pre>
+    <p><strong>Explanation:</strong>The MySQL IFNULL() function lets you return an alternative value if an expression is NULL.
+
+The example above returns 0 if the value is NULL</p>
+</div>
+</body>
+</html>

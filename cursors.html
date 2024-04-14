@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL and PL/SQL Examples</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+    .example {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="background_image">
+<div class="navbar">
+<a href="variables.html">VARIABLES</a>
+
+<a href="controlstruc.html">CONTROL STRUCTURES</a>
+
+<a href="procedures.html">PROCEDURES</a>
+
+<a href="functionsplsql.html">FUNCTIONS</a>
+
+<a href="cursors.html">CURSORS</a>
+
+<a href="excphandling.html">EXCEPTION HANDLING</a>
+
+<a href="triggers.html">TRIGGERS</a>
+</div>
+
+  <div class="buttons">
+    <a href="sql.html"class="button">MYSQL</a>
+    <a href="plsql.html" class="button">PLSQL</a>
+  </div>
+<h1> Cursors </h1>
+<p>When an SQL statement is processed, Oracle creates a memory area known as context area. A cursor is a pointer to this context area. It contains all information needed for processing the statement. In PL/SQL, the context area is controlled by Cursor. A cursor contains information on a select statement and the rows of data accessed by it.
+<br>
+A cursor is used to referred to a program to fetch and process the rows returned by the SQL statement, one at a time. There are two types of cursors:<br>
+
+1.Implicit Cursors<br>
+2.Explicit Cursors</p>
+
+<div class="example">
+    <h3>PL/SQL Implicit Cursors</h3>
+    <p>The following table specifies the status of the cursor with each of its attribute. </p>
+<table class="alt">
+<tr>
+<th>Attribute </th><th>Description</th>
+</tr>
+<tr>
+<td>%FOUND</td><td>Its return value is TRUE if DML statements like INSERT, DELETE and UPDATE affect at least one row or more rows or a SELECT INTO statement returned one or more rows. Otherwise it returns FALSE. </td>
+</tr>
+<tr>
+<td>%NOTFOUND</td><td>Its return value is TRUE if DML statements like INSERT, DELETE and UPDATE affect no row, or a SELECT INTO statement return no rows. Otherwise it returns FALSE. It is a just opposite of %FOUND. </td>
+</tr>
+<tr>
+<td>%ISOPEN</td><td>It always returns FALSE for implicit cursors, because the SQL cursor is automatically closed after executing its associated SQL statements. </td>
+</tr>
+<tr>
+<td>%ROWCOUNT</td><td>It returns the number of rows affected by DML statements like INSERT, DELETE, and UPDATE or returned by a SELECT INTO statement. </td>
+</tr>
+</table>	
+</div>
+<div class="example">
+    <h3>Implicit Cursor Example</h3>
+    <pre><code>DECLARE   
+   total_rows number(2);  
+BEGIN  
+   UPDATE  customers  
+   SET salary = salary + 5000;  
+   IF sql%notfound THEN  
+      dbms_output.put_line('no customers updated');  
+   ELSIF sql%found THEN  
+      total_rows := sql%rowcount;  
+      dbms_output.put_line( total_rows || ' customers updated ');  
+   END IF;   
+END;  
+/  </code></pre>
+    <p><strong>Explanation:</strong>The above program to update the table and increase salary of each customer by 5000. Here, SQL%ROWCOUNT attribute is used to determine the number of rows affected.</p>
+</div>
+
+<div class="example">
+    <h3>PL/SQL Explicit Cursors</h3>
+    <pre><code>CURSOR cursor_name IS select_statement;;  </code></pre>
+    <p><strong>Explanation:</strong>The Explicit cursors are defined by the programmers to gain more control over the context area. These cursors should be defined in the declaration section of the PL/SQL block. It is created on a SELECT statement which returns more than one row.</p>
+</div>
+
+<div class="example">
+<h3> Steps: </h3>
+    <h3>1. Declare the cursor:</h3>
+    <pre><code>CURSOR name IS  
+ SELECT statement;   </code></pre>
+    <p><strong>Explanation:</strong>It defines the cursor with a name and the associated SELECT statement.</p>
+</div>
+
+<div class="example">
+    <h3>2. Open the cursor:</h3>
+    <pre><code>OPEN cursor_name;  </code></pre>
+    <p><strong>Explanation:</strong>It is used to allocate memory for the cursor and make it easy to fetch the rows returned by the SQL statements into it.</p>
+</div>
+
+<div class="example">
+    <h3>3. Fetch the cursor:</h3>
+    <pre><code>FETCH cursor_name INTO variable_list;  </code></pre>
+    <p><strong>Explanation:</strong>It is used to access one row at a time. You can fetch rows from the above-opened cursor as above.</p>
+</div>
+
+<div class="example">
+    <h3>4. Close the cursor:</h3>
+    <pre><code>Close cursor_name; </code></pre>
+    <p><strong>Explanation:</strong>It is used to release the allocated memory. The following syntax is used to close the above-opened cursors.</p>
+</div>
+
+<div class="example">
+    <h3>PL/SQL Explicit Cursor Example</h3>
+    <pre><code>DECLARE  
+   c_id customers.id%type;  
+   c_name customers.name%type;  
+   c_addr customers.address%type;  
+   CURSOR c_customers is  
+      SELECT id, name, address FROM customers;  
+BEGIN  
+   OPEN c_customers;  
+   LOOP  
+      FETCH c_customers into c_id, c_name, c_addr;  
+      EXIT WHEN c_customers%notfound;  
+      dbms_output.put_line(c_id || ' ' || c_name || ' ' || c_addr);  
+   END LOOP;  
+   CLOSE c_customers;  
+END;  
+/  </code></pre>
+    <p><strong>Explanation:</strong>Explicit cursors are defined by programmers to gain more control over the context area. It is defined in the declaration section of the PL/SQL block. It is created on a SELECT statement which returns more than one row.
+<br>
+Let's take an example to demonstrate the use of explicit cursor.Execute the above program to retrieve the customer name and address.</p>
+</div>
+</BODY>
+</html>
+

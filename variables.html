@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL and PL/SQL Examples</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+    .example {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background_image">
+<div class="navbar">
+<a href="variables.html">VARIABLES</a>
+
+<a href="controlstruc.html">CONTROL STRUCTURES</a>
+
+<a href="procedures.html">PROCEDURES</a>
+
+<a href="functionsplsql.html">FUNCTIONS</a>
+
+<a href="cursors.html">CURSORS</a>
+
+<a href="excphandling.html">EXCEPTION HANDLING</a>
+
+<a href="triggers.html">TRIGGERS</a>
+</div>
+  <div class="buttons">
+    <a href="sql.html"class="button">MYSQL</a>
+    <a href="plsql.html" class="button">PLSQL</a>
+  </div>
+
+<h1> Variables in PL/SQL </h1>
+<div class="example">
+    <h3>Variable Declraration</h3>
+    <pre><code>**Syntax**
+variable_name [CONSTANT] datatype [NOT NULL] [:= | DEFAULT initial_value] 
+**EXAMPLE**
+Radius Number := 5;
+Date_of_birth date;
+</code></pre>
+    <p><strong>Explanation:</strong>A variable is a meaningful name which facilitates a programmer to store data temporarily during the execution of code. It helps you to manipulate data in PL/SQL programs. It is nothing except a name given to a storage area. Each variable in the PL/SQL has a specific data type which defines the size and layout of the variable's memory.</p>
+</div>
+
+<div class="example">
+    <h3>Constant Declaration</h3>
+    <pre><code>**Syntax**
+const_name CONSTANT datatype[NOT NULL]:=expression|value;
+**EXAMPLE**
+pi CONSTANT NUMBER (9,7) := 3.14;
+dept CONSTANT VARCHAR(10) := 'COMPUTER';</code></pre>
+    <p><strong>Explanation:</strong>In the first declaration, pi is constant of NUMBER datatype which is assinged a value 3.14. In the second declaration, dept is declared as  constant of varchar2 datatype which is assigned a value COMPUTER.</p>
+</div>
+
+<h3> Variable Atrributes </h3>
+
+<div class="example">
+    <h3>%TYPE Declaration:</h3>
+    <pre><code>SALARY EMP.SAL %TYPE;</code></pre>
+    <p><strong>Explanation:</strong>In PL/SQL, you can declare variables to be of the same data type as a column in a table or cursor using the %TYPE attribute. This ensures data consistency and reduces the risk of type mismatch errors.</p>
+</div>
+
+<div class="example">
+    <h3>%ROWTYPE</h3>
+    <pre><code>EMPLOYEE EMP%ROWTYPE;</code></pre>
+    <p><strong>Explanation:</strong>This declaration declares a record named employee having fields with the same name and data types as that of columns in the EMP table.</p>
+</div>
+
+<h3> INITAILIZING VARIABLES </h3>
+
+<div class="example">
+    <h3>Adding two numbers</h3>
+    <pre><code>DECLARE  
+   a integer := 30;  
+   b integer := 40;  
+   c integer;  
+   f real;  
+BEGIN  
+   c := a + b;  
+   dbms_output.put_line('Value of c: ' || c);  
+   f := 100.0/3.0;  
+   dbms_output.put_line('Value of f: ' || f);  
+END;  </code></pre>
+    <p><strong>Explanation:</strong>We declared 4 variables and then created a simple addition function in BEGIN.</p>
+</div>
+
+<div class="example">
+    <h3>NESTED BLOCKS</h3>
+    <pre><code>Declare
+v number := 1;
+Begin
+	Declare
+		s number := 2;
+	Begin 
+		dbms_output.put_line (s)
+		dbms_output.put_line (v)
+	END;
+END;
+/</code></pre>
+    <p><strong>Explanation:</strong><p>In PL/Sql, we can nest one or more block inside another block. Tge vkicj nat ve annonymous blocks, procedures, functionsm packages. The general advantage of nesting a block is that we can crat ea scope for all the declared variables, constants and executable statements in the block. This feature not only improves our control over run time behavior but alos reduce the chances of a programmer's accidently modifying the wrong variable.</p>
+</div>
+
+</body>
+</html>

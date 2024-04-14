@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL and PL/SQL Examples</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+    .example {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="background_image">
+<div class="navbar">
+<a href="variables.html">VARIABLES</a>
+
+<a href="controlstruc.html">CONTROL STRUCTURES</a>
+
+<a href="procedures.html">PROCEDURES</a>
+
+<a href="functionsplsql.html">FUNCTIONS</a>
+
+<a href="cursors.html">CURSORS</a>
+
+<a href="excphandling.html">EXCEPTION HANDLING</a>
+
+<a href="triggers.html">TRIGGERS</a>
+</div>
+  <div class="buttons">
+    <a href="sql.html"class="button">MYSQL</a>
+    <a href="plsql.html" class="button">PLSQL</a>
+  </div>
+<h1> EXCEPTION HANDLING </h1>
+<p>An error occurs during the program execution is called Exception in PL/SQL.
+
+PL/SQL facilitates programmers to catch such conditions using exception block in the program and an appropriate action is taken against the error condition.
+<br>
+There are two type of exceptions:
+<br>-System-defined Exceptions
+<br>-User-defined Exceptions</p>
+
+<div class="example">
+    <h3>Syntax for Exception Handling</h3>
+    <pre><code>DECLARE  
+   <declarations section>  
+BEGIN  
+   <executable command(s)>  
+EXCEPTION  
+   <exception handling goes here >  
+   WHEN exception1 THEN   
+       exception1-handling-statements   
+   WHEN exception2  THEN   
+      exception2-handling-statements   
+   WHEN exception3 THEN   
+      exception3-handling-statements  
+   ........  
+   WHEN others THEN  
+      exception3-handling-statements  
+END;  </code></pre>
+    <p><strong>Explanation:</strong>Syntax for exception handling</p>
+</div>
+
+<div class="example">
+    <h3>Example Program</h3>
+<h3> EXample Table: </h3>
+<table class="alt">
+<tr>
+<th>ID</th><th>NAME</th><th>AGE</th><th>ADDRESS</th><th>SALARY</th>
+</tr>
+<tr>
+<td>1</td><td>Ramesh </td><td>23</td><td> Allahabad</td><td>20000</td>
+</tr>
+<tr>
+<td>2</td><td>Suresh</td><td>22</td><td>Kanpur </td><td>22000</td
+</tr>
+<tr>
+<td>3</td><td>Mahesh</td><td>24</td><td>Ghaziabad</td><td>24000</td
+</tr>
+<tr>
+<td>4</td><td>Chandan</td><td>25</td><td>Noida</td><td>26000</td
+</tr>
+<tr>
+<td>5</td><td>Alex</td><td>21</td><td>Paris</td><td>28000</td
+</tr>
+<tr>
+<td>6</td><td>Sunita</td><td>20</td><td>Delhi</td><td>30000</td
+</tr>
+</table>	
+    <pre><code>DECLARE  
+   c_id customers.id%type := 8;  
+   c_name  customers.name%type;  
+   c_addr customers.address%type;  
+BEGIN  
+   SELECT  name, address INTO  c_name, c_addr  
+   FROM customers  
+   WHERE id = c_id;  
+DBMS_OUTPUT.PUT_LINE ('Name: '||  c_name);  
+ DBMS_OUTPUT.PUT_LINE ('Address: ' || c_addr);  
+EXCEPTION  
+   WHEN no_data_found THEN  
+      dbms_output.put_line('No such customer!');  
+   WHEN others THEN  
+      dbms_output.put_line('Error!');  
+END;  
+/   </code></pre>
+    <p><strong>Explanation:</strong>The above program should show the name and address of a customer as result whose ID is given. But there is no customer with ID value 8 in our database, so the program raises the run-time exception NO_DATA_FOUND, which is captured in EXCEPTION block.</p>
+</div>
+
+<div class="example">
+    <h3>Raising Exceptions</h3>
+    <pre><code>DECLARE  
+   exception_name EXCEPTION;  
+BEGIN  
+   IF condition THEN  
+      RAISE exception_name;  
+   END IF;  
+EXCEPTION  
+   WHEN exception_name THEN  
+   statement;  
+END;  </code></pre>
+    <p><strong>Explanation:</strong>In the case of any internal database error, exceptions are raised by the database server automatically. But it can also be raised explicitly by programmer by using command RAISE.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL and PL/SQL Examples</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+    .example {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background_image">
+<div class="navbar">
+<a href="variables.html">VARIABLES</a>
+
+<a href="controlstruc.html">CONTROL STRUCTURES</a>
+
+<a href="procedures.html">PROCEDURES</a>
+
+<a href="functionsplsql.html">FUNCTIONS</a>
+
+<a href="cursors.html">CURSORS</a>
+
+<a href="excphandling.html">EXCEPTION HANDLING</a>
+
+<a href="triggers.html">TRIGGERS</a>
+</div>
+  <div class="buttons">
+    <a href="sql.html"class="button">MYSQL</a>
+    <a href="plsql.html" class="button">PLSQL</a>
+  </div>
+<h1> PL/SQL Triggers </h1>
+<p>Trigger is invoked by Oracle engine automatically whenever a specified event occurs.Trigger is stored into database and invoked repeatedly, when specific condition match.<br>
+
+Triggers are stored programs, which are automatically executed or fired when some event occurs.<br>
+
+Triggers are written to be executed in response to any of the following events.<br>
+1.A database manipulation (DML) statement (DELETE, INSERT, or UPDATE).<br>
+2.A database definition (DDL) statement (CREATE, ALTER, or DROP).<br>
+3.A database operation (SERVERERROR, LOGON, LOGOFF, STARTUP, or SHUTDOWN).<br>
+Triggers could be defined on the table, view, schema, or database with which the event is associated.</p>
+
+<div class="example">
+    <h3>Creating a trigger</h3>
+    <pre><code>CREATE OR REPLACE TRIGGER display_salary_changes  
+BEFORE DELETE OR INSERT OR UPDATE ON customers  
+FOR EACH ROW  
+WHEN (NEW.ID > 0)  
+DECLARE  
+   sal_diff number;  
+BEGIN  
+   sal_diff := :NEW.salary  - :OLD.salary;  
+   dbms_output.put_line('Old salary: ' || :OLD.salary);  
+   dbms_output.put_line('New salary: ' || :NEW.salary);  
+   dbms_output.put_line('Salary difference: ' || sal_diff);  
+END;  
+/  </code></pre>
+    <p><strong>Explanation:</strong>A program to create a row level trigger for the CUSTOMERS table that would fire for INSERT or UPDATE or DELETE operations performed on the CUSTOMERS table. This trigger will display the salary difference between the old values and new values.</p>
+</div>
+
+<div class="example">
+    <h3>Check the salary difference by procedure:</h3>
+    <pre><code>DECLARE   
+   total_rows number(2);  
+BEGIN  
+   UPDATE  customers  
+   SET salary = salary + 5000;  
+   IF sql%notfound THEN  
+      dbms_output.put_line('no customers updated');  
+   ELSIF sql%found THEN  
+      total_rows := sql%rowcount;  
+      dbms_output.put_line( total_rows || ' customers updated ');  
+   END IF;   
+END;  
+/ 
+Output:
+Old salary: 20000
+New salary: 25000
+Salary difference: 5000
+Old salary: 22000
+New salary: 27000
+Salary difference: 5000
+Old salary: 24000
+New salary: 29000
+Salary difference: 5000
+Old salary: 26000
+New salary: 31000
+Salary difference: 5000
+Old salary: 28000
+New salary: 33000
+Salary difference: 5000
+Old salary: 30000
+New salary: 35000
+Salary difference: 5000
+6 customers updated  </code></pre>
+    <p><strong>Explanation:</strong>Use the above code to get the old salary, new salary and salary difference after the trigger created.</p>
+</div>
+</body>
+</html>

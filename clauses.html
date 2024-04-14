@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLAUSES IN SQL WITH EXAMPLES</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+    .example {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="background_image">
+<div class="navbar">
+<a href="clauses.html">CLAUSES in SQL</a>
+
+<a href="ops.html">OPERATORS in SQL</a>
+
+<a href="statements.html">SQL Statements</a>
+
+<a href="functions.html">SQL Functions</a>
+</div>
+
+<div class="buttons">
+    <a href="sql.html"class="button">MYSQL</a>
+    <a href="plsql.html" class="button">PLSQL</a>
+  </div>
+
+<h1>CLAUSES</h1>
+
+<div class="example">
+    <h3>WHERE Clause</h3>
+    <pre><code>SELECT * FROM employees WHERE department_id = 10;</code></pre>
+    <p><strong>Explanation:</strong> This query filters employees based on the department_id equal to 10.</p>
+</div>
+
+<div class="example">
+    <h3>LIMIT Clause</h3>
+    <pre><code>SELECT * FROM Customers
+WHERE Country='Germany'
+LIMIT 3;</code></pre>
+    <p><strong>Explanation:</strong>selects the first three records from the "Customers" table, where the country is "Germany"</p>
+</div>
+
+<div class="example">
+    <h3>HAVING Clause</h3>
+    <pre><code>SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country
+HAVING COUNT(CustomerID) > 5;</code></pre>
+    <p><strong>Explanation:</strong>lists the number of customers in each country. Only include countries with more than 5 customers</p>
+</div>
+
+<div class="example">
+    <h3>Order By Keyword</h3>
+    <pre><code>SELECT * FROM Customers
+ORDER BY Country;</code></pre>
+    <p><strong>Explanation:</strong>selects all customers from the "Customers" table, sorted by the "Country" column</p>
+</div>
+
+<div class="example">
+    <h3>JOIN Clause</h3>
+    <pre><code>SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID;</code></pre>
+    <p><strong>Explanation:</strong>A JOIN clause is used to combine rows from two or more tables, based on a related column between them.<br>The "CustomerID" column in the "Orders" table refers to the "CustomerID" in the "Customers" table. The relationship between the two tables above is the "CustomerID" column.
+</p>
+</div>
+</body>
+</html>
